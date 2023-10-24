@@ -1,6 +1,6 @@
 ---
 layout: base
-title: Alien World
+title: Chest Opening
 image: /images/alien_planet.jpg
 ---
 
@@ -14,10 +14,39 @@ image: /images/alien_planet.jpg
     <div id="card-container">
         <!-- Cards will be displayed here -->
     </div>
-    <button id="open-chest">Open Chest</button>
+    <button id="common-chest">Common Chest</button>
 
     <script>
         // Add your JavaScript to fetch data and handle chest opening here
+        // Function to simulate opening the common chest and fetching data
+        function openCommonChest() {
+            // You can add your logic here to fetch data or perform other actions
+            // For this example, we'll simply display an alert message.
+            alert("You have opened a Common Chest!");
+        }
+
+        // Add a click event listener to the "Common Chest" button
+        document.getElementById("common-chest").addEventListener("click", function() {
+            openCommonChest(); // Call the function to open the common chest
+        });
     </script>
+
+     <button id="rare-chest">Rare Chest</button>
+     <script>
+        // Add your JavaScript to fetch data and handle chest opening here
+    </script>
+      <button id="epic-chest">Epic Chest</button>
+      <script>
+         // Add your JavaScript to fetch data and handle chest opening here
+     </script>
+    <button id="legendary-chest">Legendary Chest</button>
+    <script>
+       // Add your JavaScript to fetch data and handle chest opening here
+   </script>
+
+   <button id="champion-chest">Champion Chest</button>
+   <script>
+      // Add your JavaScript to fetch data and handle chest opening here
+  </script>
 </body>
 </html>
