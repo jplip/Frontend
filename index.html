@@ -1,13 +1,19 @@
 ---
 layout: base
-title: Alien World
-image: /images/alien_planet.jpg
+title: Clash Royale API
+images:
+  background:
+    src: /images/clashback.jpg
 ---
 
 <html>
 <head>
     <title>Clash Royale Card Viewer</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        h1 {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <h1>Clash Royale Card Viewer</h1>
@@ -43,21 +49,21 @@ image: /images/alien_planet.jpg
 
         // Add a click event listener to the "Common Chest" button
         document.getElementById("rare-chest").addEventListener("click", function() {
-            openRareChestt(); // Call the function to open the common chest
+            openRareChest(); // Call the function to open the common chest
         });
     </script>
       <button id="epic-chest">Epic Chest</button>
-      <script>
+     <script>
          // Add your JavaScript to fetch data and handle chest opening here
      </script>
     <button id="legendary-chest">Legendary Chest</button>
     <script>
        // Add your JavaScript to fetch data and handle chest opening here
-   </script>
+    </script>
 
    <button id="champion-chest">Champion Chest</button>
    <script>
       // Add your JavaScript to fetch data and handle chest opening here
-  </script>
+   </script>
 </body>
 </html>
