@@ -6,12 +6,38 @@ images:
     src: /images/clashback.jpg
 ---
 
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Clash Royale Card Viewer</title>
+    <title>Clash Royale API</title>
     <style>
         h1 {
             text-align: center;
+        }
+
+        .button-container {
+            text-align: center;
+        }
+
+        .cool-button {
+            background: linear-gradient(to bottom, #3498db 0%, #2980b9 100%);
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block; /* Display buttons inline */
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: background 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .cool-button:hover {
+            background: linear-gradient(to bottom, #2980b9 0%, #3498db 100%);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
@@ -20,50 +46,14 @@ images:
     <div id="card-container">
         <!-- Cards will be displayed here -->
     </div>
-    <button id="common-chest">Common Chest</button>
+    <div class="button-container">
+        <button id="common-chest" class="cool-button">Common Chest</button>
 
-    <script>
-        // Add your JavaScript to fetch data and handle chest opening here
-        // Function to simulate opening the common chest and fetching data
-        function openCommonChest() {
-            // You can add your logic here to fetch data or perform other actions
-            // For this example, we'll simply display an alert message.
-            alert("You have opened a Common Chest!");
-        }
-
-        // Add a click event listener to the "Common Chest" button
-        document.getElementById("common-chest").addEventListener("click", function() {
-            openCommonChest(); // Call the function to open the common chest
-        });
-    </script>
-
-     <button id="rare-chest">Rare Chest</button>
-     <script>
-        // Add your JavaScript to fetch data and handle chest opening here
-        // Function to simulate opening the common chest and fetching data
-        function openRareChest() {
-            // You can add your logic here to fetch data or perform other actions
-            // For this example, we'll simply display an alert message.
-            alert("You have opened a Rare Chest!");
-        }
-
-        // Add a click event listener to the "Common Chest" button
-        document.getElementById("rare-chest").addEventListener("click", function() {
-            openRareChest(); // Call the function to open the common chest
-        });
-    </script>
-      <button id="epic-chest">Epic Chest</button>
-     <script>
-         // Add your JavaScript to fetch data and handle chest opening here
-     </script>
-    <button id="legendary-chest">Legendary Chest</button>
-    <script>
-       // Add your JavaScript to fetch data and handle chest opening here
-    </script>
-
-   <button id="champion-chest">Champion Chest</button>
-   <script>
-      // Add your JavaScript to fetch data and handle chest opening here
-   </script>
+        <!-- Repeat the above structure for other chest buttons -->
+        <button id="rare-chest" class="cool-button">Rare Chest</button>
+        <button id="epic-chest" class="cool-button">Epic Chest</button>
+        <button id="legendary-chest" class="cool-button">Legendary Chest</button>
+        <button id="champion-chest" class="cool-button">Champion Chest</button>
+    </div>
 </body>
 </html>
