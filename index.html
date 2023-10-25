@@ -6,11 +6,7 @@ images:
     src: /images/clashback.jpg
 ---
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Clash Royale API</title>
-    <style>
+<style>
 
         h1 {
             text-align: center;
@@ -40,7 +36,7 @@ images:
             background: linear-gradient(to bottom, #6d6d6d 0%, #575757 100%);
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
         }
-    </style>
+</style>
     <style>
         h1 {
             text-align: center;
@@ -101,7 +97,7 @@ images:
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
         }
     </style>
-    <style>
+<style>
         h1 {
             text-align: center;
         }
@@ -110,71 +106,67 @@ images:
             text-align: center;
         }
 
-        .legendary-button {
-            background: linear-gradient(to bottom, #34d5db 0%, #29b9a6 100%);
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block; /* Display buttons inline */
-            font-size: 18px;
-            margin: 10px;
-            cursor: pointer;
-            border-radius: 25px;
-            transition: background 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+    .legendary-button {
+        background: linear-gradient(to bottom, #34d5db 0%, #29b9a6 100%);
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block; /* Display buttons inline */
+        font-size: 18px;
+        margin: 10px;
+        cursor: pointer;
+        border-radius: 25px;
+        transition: background 0.3s, box-shadow 0.3s;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
 
-        .legendary-button:hover {
-            background: linear-gradient(to bottom, #29b6b9 0%, #34d0db 100%);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-        }
-    </style>
-    <style>
-        h1 {
-            text-align: center;
-        }
+    .legendary-button:hover {
+        background: linear-gradient(to bottom, #29b6b9 0%, #34d0db 100%);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    }
+</style>
+<style>
+    h1 {
+        text-align: center;
+    }
 
-        .button-container {
-            text-align: center;
-        }
+    .button-container {
+        text-align: center;
+    }
 
-        .champion-button {
-            background: linear-gradient(to bottom, #d5db34 0%, #b9b229 100%);
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block; /* Display buttons inline */
-            font-size: 18px;
-            margin: 10px;
-            cursor: pointer;
-            border-radius: 25px;
-            transition: background 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+    .champion-button {
+        background: linear-gradient(to bottom, #d5db34 0%, #b9b229 100%);
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block; /* Display buttons inline */
+        font-size: 18px;
+        margin: 10px;
+        cursor: pointer;
+        border-radius: 25px;
+        transition: background 0.3s, box-shadow 0.3s;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
 
-        .champion-button:hover {
-            background: linear-gradient(to bottom, #f7f305 0%, #dbd034 100%);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-        }
-    </style>
-</head>
-<body>
-    <h1>Clash Royale Card Viewer</h1>
-    <div id="card-container">
-        <!-- Cards will be displayed here -->
-    </div>
-    <div class="button-container">
-        <button id="common-chest" class="common-button">Common Chest</button>
+    .champion-button:hover {
+        background: linear-gradient(to bottom, #f7f305 0%, #dbd034 100%);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+     }
+</style>
+<h1>Clash Royale API</h1>
+ <div id="card-container">
+    <!-- Cards will be displayed here -->
+</div>
+<div class="button-container">
+    <button id="common-chest" class="common-button">Common Chest</button>
 
-        <!-- Repeat the above structure for other chest buttons -->
-        <button id="rare-chest" class="rare-button">Rare Chest</button>
-        <button id="epic-chest" class="epic-button">Epic Chest</button>
-        <button id="legendary-chest" class="legendary-button">Legendary Chest</button>
-        <button id="champion-chest" class="champion-button">Champion Chest</button>
-    </div>
-</body>
-</html>
+    <!-- Repeat the above structure for other chest buttons -->
+    <button id="rare-chest" class="rare-button">Rare Chest</button>
+    <button id="epic-chest" class="epic-button">Epic Chest</button>
+    <button id="legendary-chest" class="legendary-button">Legendary Chest</button>
+    <button id="champion-chest" class="champion-button">Champion Chest</button>
+</div>
