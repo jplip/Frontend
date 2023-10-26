@@ -50,32 +50,35 @@ images:
     </div>
     <div class="button-container">
         <script>
-            function createButton(id, className, text, message) {
+            // Array of common cards
+            var commonCards = [
+                "knight", "skeletons", "ice spirit", "heal spirit", "bats",
+                "fire spirit", "goblins", "spear goblins", "zap", "giant snowball",
+                "archers", "cannon", "goblin gang", "arrows", "minions",
+                "bomber", "skeleton barrel", "skeleton dragons", "tesla", "mortar",
+                "electro spirit", "minion horde"
+            ];
+
+            function createButton(id, className, text, cardList) {
                 var button = document.createElement("button");
                 button.id = id;
                 button.className = "custom-button " + className; // Apply the custom styles
                 button.innerHTML = text;
                 button.addEventListener("click", function() {
-                    alert("You have opened a " + message);
+                    // Randomly select a common card from the list
+                    var randomCard = cardList[Math.floor(Math.random() * cardList.length)];
+                    var resultContainer = document.getElementById("card-container");
+                    resultContainer.innerHTML = "You have opened the chest and received a " + randomCard;
                 });
                 return button;
             }
 
-            // Create and append the buttons
+            // Create and append the common chest button
             var buttonContainer = document.querySelector(".button-container");
-
-            var commonChestButton = createButton("common-chest", "common-button", "Common Chest", "common chest");
-            var rareChestButton = createButton("rare-chest", "rare-button", "Rare Chest", "rare chest");
-            var epicChestButton = createButton("epic-chest", "epic-button", "Epic Chest", "epic chest");
-            var legendaryChestButton = createButton("legendary-chest", "legendary-button", "Legendary Chest", "legendary chest");
-            var championChestButton = createButton("champion-chest", "champion-button", "Champion Chest", "champion chest");
-
+            var commonChestButton = createButton("common-chest", "common-button", "Common Chest", commonCards);
             buttonContainer.appendChild(commonChestButton);
-            buttonContainer.appendChild(rareChestButton);
-            buttonContainer.appendChild(epicChestButton);
-            buttonContainer.appendChild(legendaryChestButton);
-            buttonContainer.appendChild(championChestButton);
         </script>
     </div>
 </body>
 </html>
+
