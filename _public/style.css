@@ -61,3 +61,44 @@ h1 {
         width: 80%;
     }
 }
+/* Style the tab and search container */
+.tab {
+    overflow: hidden;
+  }
+  
+  .tab button {
+    background-color: #f2f2f2;
+    float: left;
+    border: 1px solid #ccc;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 15px;
+  }
+  
+  .search-container {
+    text-align: center;
+  }
+  
+  .search-container input[type="text"] {
+    padding: 10px;
+    margin-top: 10px;
+    width: 50%;
+  }
+  
+  .search-container button {
+    padding: 10px 15px;
+    margin-top: 10px;
+  }
+  
+  /* Style the card display area */
+  .card-display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .card-display img {
+    width: 100px;
+    height: 150px;
+    margin: 10px;
+  }

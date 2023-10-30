@@ -1,0 +1,115 @@
+---
+layout: base
+title: Card Search
+images:
+  background:
+    src: /images/clashback.jpg
+---
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* CSS Styles */
+        .tab {
+            overflow: hidden;
+        }
+
+        .tab button {
+            background-color: #f2f2f2;
+            float: left;
+            border: 1px solid #ccc;
+            outline: none;
+            cursor: pointer;
+            padding: 10px 15px;
+        }
+
+        .search-container {
+            text-align: center;
+        }
+
+        .search-container input[type="text"] {
+            padding: 10px;
+            margin-top: 10px;
+            width: 50%;
+        }
+
+        .search-container button {
+            padding: 10px 15px;
+            margin-top: 10px;
+        }
+
+        .card-display {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card-display img {
+            width: 100px;
+            height: 150px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Tab and Search Elements -->
+    <div class="tab">
+        <button class="tablinks" id="homeTab">Home</button>
+        <button class="tablinks" id="cardSearchTab">Card Search</button>
+    </div>
+    <div class="search-container">
+        <input type="text" id="cardSearchInput" placeholder="Search for cards">
+        <button id="searchButton">Search</button>
+    </div>
+    <div class="card-display">
+        <!-- Card images will be displayed here -->
+    </div>
+
+    <script>
+        // JavaScript Code
+        document.getElementById("cardSearchTab").addEventListener("click", function () {
+            // Handle "Card Search" tab click
+            showCardSearch();
+        });
+
+        document.getElementById("searchButton").addEventListener("click", function () {
+            // Handle search button click
+            searchCards();
+        });
+
+        function showCardSearch() {
+            // Display the card search interface and hide other content
+            // You can use CSS to control visibility or replace inner HTML content
+        }
+
+        function searchCards() {
+            const query = document.getElementById("cardSearchInput").value.toLowerCase();
+
+            // Example card data
+            const cardData = [
+                { name: "Card 1", image_url: "card1.jpg" },
+                { name: "Card 2", image_url: "card2.jpg" },
+                // Add more card objects
+            ];
+
+            // Assuming you have an array of card objects, you can filter card data based on the query
+            const matchingCards = cardData.filter(card => card.name.toLowerCase().includes(query));
+
+            displayMatchingCards(matchingCards);
+        }
+
+        function displayMatchingCards(cards) {
+            const cardDisplay = document.querySelector(".card-display");
+            cardDisplay.innerHTML = ""; // Clear previous results
+
+            cards.forEach(card => {
+                const cardImage = document.createElement("img");
+                cardImage.src = card.image_url;
+                cardDisplay.appendChild(cardImage);
+            });
+        }
+    </script>
+</body>
+</html>
+
+
