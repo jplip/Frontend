@@ -52,11 +52,21 @@ images:
         <script>
             // Array of common cards
             var commonCards = [
-                "knight", "skeletons", "ice spirit", "heal spirit", "bats",
-                "fire spirit", "goblins", "spear goblins", "zap", "giant snowball",
-                "archers", "cannon", "goblin gang", "arrows", "minions",
-                "bomber", "skeleton barrel", "skeleton dragons", "tesla", "mortar",
-                "electro spirit", "minion horde"
+                "Knight", "Skeletons", "Ice Spirit", "Heal Spirit", "Bats",
+                "Fire Spirit", "Goblins", "Spear Goblins", "Zap", "Giant Snowball",
+                "Archers", "Cannon", "Goblin Gang", "Arrows", "Minions",
+                "Bomber", "Skeleton Barrel", "Skeleton Dragons", "Tesla", "Mortar",
+                "Electro Spirit", "Minion Horde"
+            ];
+
+            // Array of rare cards
+            var rareCards = [
+                "Mini P.E.K.K.A", "Musketeer", "Giant", "Valkyrie", "Mega Minion",
+                "Battle Ram", "Wizard", "Flying Machine", "Hog Rider", "Royal Hogs",
+                "Three Musketeers", "Battle Healer", "Ice Golem", "Dart Goblin",
+                "Zappies", "Heal Spirit", "Elixir Golem", "Fireball", "Rocket",
+                "Earthquake", "Goblin Cage", "Goblin Hut", "Tombstone", "Bomb Tower",
+                "Inferno Tower", "Barbarian Hut", "Furnace", "Elixir Collector"
             ];
 
             function createButton(id, className, text, cardList) {
@@ -65,7 +75,7 @@ images:
                 button.className = "custom-button " + className; // Apply the custom styles
                 button.innerHTML = text;
                 button.addEventListener("click", function() {
-                    // Randomly select a common card from the list
+                    // Randomly select a card from the list
                     var randomCard = cardList[Math.floor(Math.random() * cardList.length)];
                     var resultContainer = document.getElementById("card-container");
                     resultContainer.innerHTML = "You have opened the chest and received a " + randomCard;
@@ -77,8 +87,14 @@ images:
             var buttonContainer = document.querySelector(".button-container");
             var commonChestButton = createButton("common-chest", "common-button", "Common Chest", commonCards);
             buttonContainer.appendChild(commonChestButton);
+
+            // Create and append the rare chest button
+            var rareChestButton = createButton("rare-chest", "rare-button", "Rare Chest", rareCards);
+            buttonContainer.appendChild(rareChestButton);
         </script>
     </div>
 </body>
 </html>
+
+
 
