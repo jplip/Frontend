@@ -9,70 +9,20 @@ images:
 <html>
 <head>
     <style>
-        /* CSS Styles */
-        .tab {
-            overflow: hidden;
-        }
-
-        .tab button {
-            background-color: #f2f2f2;
-            float: left;
-            border: 1px solid #ccc;
-            outline: none;
-            cursor: pointer;
-            padding: 10px 15px;
-        }
-
-        .search-container {
-            text-align: center;
-        }
-
-        .search-container input[type="text"] {
-            padding: 10px;
-            margin-top: 10px;
-            width: 50%;
-        }
-
-        .search-container button {
-            padding: 10px 15px;
-            margin-top: 10px;
-        }
-
-        .card-display {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .card-display img {
-            width: 100px;
-            height: 150px;
-            margin: 10px;
-        }
+        /* CSS Styles (Same as previous examples) */
     </style>
 </head>
 <body>
-    <!-- Tab and Search Elements -->
-    <div class="tab">
-        <button class="tablinks" id="homeTab">Home</button>
-        <button class="tablinks" id="cardSearchTab">Card Search</button>
-    </div>
-    <div class="search-container">
-        <input type="text" id="cardSearchInput" placeholder="Search for cards">
-        <button id="searchButton">Search</button>
-    </div>
-    <div class="card-display">
-        <!-- Card images will be displayed here -->
-    </div>
+    <!-- Tab and Search Elements (Same as previous examples) -->
 
     <script>
         // JavaScript Code
-        document.getElementById("cardSearchTab").addEventListener("click", function () {
+        document.getElementById('cardSearchTab').addEventListener('click', function () {
             // Handle "Card Search" tab click
             showCardSearch();
         });
 
-        document.getElementById("searchButton").addEventListener("click", function () {
+        document.getElementById('searchButton').addEventListener('click', function () {
             // Handle search button click
             searchCards();
         });
@@ -83,27 +33,27 @@ images:
         }
 
         function searchCards() {
-            const query = document.getElementById("cardSearchInput").value.toLowerCase();
+            const query = document.getElementById('cardSearchInput').value.toLowerCase();
 
-            // Example card data
-            const cardData = [
-                { name: "Card 1", image_url: "card1.jpg" },
-                { name: "Card 2", image_url: "card2.jpg" },
-                // Add more card objects
-            ];
-
-            // Assuming you have an array of card objects, you can filter card data based on the query
-            const matchingCards = cardData.filter(card => card.name.toLowerCase().includes(query));
-
-            displayMatchingCards(matchingCards);
+            // Make an AJAX request to the backend API
+            fetch('/api/cards')
+                .then(response => response.json())
+                .then(data => {
+                    // Filter card data based on the query
+                    const matchingCards = data.filter(card => card.name.toLowerCase().includes(query));
+                    displayMatchingCards(matchingCards);
+                })
+                .catch(error => {
+                    console.error('Error fetching card data:', error);
+                });
         }
 
         function displayMatchingCards(cards) {
-            const cardDisplay = document.querySelector(".card-display");
-            cardDisplay.innerHTML = ""; // Clear previous results
+            const cardDisplay = document.querySelector('.card-display');
+            cardDisplay.innerHTML = ''; // Clear previous results
 
             cards.forEach(card => {
-                const cardImage = document.createElement("img");
+                const cardImage = document.createElement('img');
                 cardImage.src = card.image_url;
                 cardDisplay.appendChild(cardImage);
             });
@@ -111,5 +61,4 @@ images:
     </script>
 </body>
 </html>
-
 

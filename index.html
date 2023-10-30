@@ -9,165 +9,99 @@ images:
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Clash Royale API</title>
-    <script>
-        // prepare HTML result container for new output
-        const resultContainer = document.getElementById("result");
-      
-        // function to fetch data based on user input
-        function fetchData() {
-          // clear previous results
-          resultContainer.innerHTML = "";
-      
-          // get user input
-          const filterInput = document.getElementById("filterInput");
-          const filter = filterInput.value;
-      
-          // prepare fetch options
-          const url = "https://itunes.apple.com/search?term=" + encodeURIComponent(filter);
-          const headers = {
-            method: 'GET',
-            mode: 'cors',
-            cache: 'default',
-            credentials: 'omit',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-          };
-      
-          // fetch the API
-          fetch(url, headers)
-            .then(response => {
-              // check for response errors
-              if (response.status !== 200) {
-                const errorMsg = 'Database response error: ' + response.status;
-                console.log(errorMsg);
-                const tr = document.createElement("tr");
-                const td = document.createElement("td");
-                td.innerHTML = errorMsg;
-                tr.appendChild(td);
-                resultContainer.appendChild(tr);
-                return;
-              }
-              // valid response will have JSON data
-              response.json().then(data => {
-                console.log(data);
-      
-                // Music data
-              for (const row of data.results) {
-                  console.log(row);
-      
-                  // tr for each row
-                  const tr = document.createElement("tr");
-                  // td for each column
-                  const artist = document.createElement("td");
-                  const track = document.createElement("td");
-                  const image = document.createElement("td");
-                  const preview = document.createElement("td");
-      
-                  // data is specific to the API
-                  artist.innerHTML = row.artistName;
-                  track.innerHTML = row.trackName; 
-                  // create preview image
-                  const img = document.createElement("img");
-                  img.src = row.artworkUrl100;
-                  image.appendChild(img);
-                  // create preview player
-                  const audio = document.createElement("audio");
-                  audio.controls = true;
-                  const source = document.createElement("source");
-                  source.src = row.previewUrl;
-                  source.type = "audio/mp4";
-                  audio.appendChild(source);
-                  preview.appendChild(audio);
-      
-                  // this builds td's into tr
-                  tr.appendChild(artist);
-                  tr.appendChild(track);
-                  tr.appendChild(image);
-                  tr.appendChild(preview);
-      
-                  // add HTML to container
-                  resultContainer.appendChild(tr);
-                }
-              })
-            })
-            .catch(err => {
-              console.error(err);
-              const tr = document.createElement("tr");
-              const td = document.createElement("td");
-              td.innerHTML = err;
-              tr.appendChild(td);
-              resultContainer.appendChild(tr);
-            });
-        }
-    </script>
     <style>
-        h1 {
-            text-align: center;
+        body {
+            font-family: Arial, sans-serif;
         }
 
-        .button-container {
-            text-align: center;
+        .tabs {
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* Define a CSS class for button styles */
-        .custom-button {
-            background: linear-gradient(to bottom, #5d5d5e 0%, #747474 100%);
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 18px;
-            margin: 10px;
+        .tab {
+            color: #fff;
+            padding: 10px 20px;
             cursor: pointer;
-            border-radius: 25px;
-            transition: background 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        /* Define the hover style */
-        .custom-button:hover {
-            background: linear-gradient(to bottom, #6d6d6d 0%, #575757 100%);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        .content {
+            padding: 20px;
+        }
+
+        .search-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #cardInput {
+            padding: 5px;
+            width: 300px;
+            margin-right: 10px;
+        }
+
+        #searchButton {
+            padding: 5px 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .stats-section {
+            padding: 20px;
+        }
+
+        .picture-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #cardImage {
+            max-width: 300px;
+            max-height: 300px;
         }
     </style>
 </head>
 <body>
-    <h1>Clash Royale Card Viewer</h1>
-    <div id="card-container">
-        <!-- Cards will be displayed here -->
+    <div class="tabs">
+        <div class="tab" id="cardSearchTab">Card Search</div>
+        <!-- Add other tabs here -->
     </div>
-    <div class="button-container">
-        <script>
-            function createButton(id, className, text, cardList) {
-                var button = document.createElement("button");
-                button.id = id;
-                button.className = "custom-button " + className; // Apply the custom styles
-                button.innerHTML = text;
-                button.addEventListener("click", function() {
-                    // Randomly select a card from the list
-                    var randomCard = cardList[Math.floor(Math.random() * cardList.length)];
-                    var resultContainer = document.getElementById("card-container");
-                    resultContainer.innerHTML = "You have opened the chest and received a " + randomCard;
-                });
-                return button;
-            }
-
-            // Create and append the common chest button
-            var buttonContainer = document.querySelector(".button-container");
-            var commonChestButton = createButton("common-chest", "common-button", "Common Chest", commonCards);
-            buttonContainer.appendChild(commonChestButton);
-
-            // Create and append the rare chest button
-            var rareChestButton = createButton("rare-chest", "rare-button", "Rare Chest", rareCards);
-            buttonContainer.appendChild(rareChestButton);
-        </script>
+    <div class="content">
+        <div class="search-section">
+            <input type="text" id="cardInput" placeholder="Enter Card Name">
+            <button id="searchButton">Search</button>
+        </div>
+        <div class="stats-section">
+            <h2>Stats</h2> <!-- Added a heading for the stats section -->
+            <!-- Display card stats here -->
+        </div>
+        <div class="picture-section">
+            <h2>Picture</h2> <!-- Added a heading for the picture section -->
+            <img src="" id="cardImage" alt="Card Image">
+        </div>
     </div>
+    <script>
+        document.getElementById('searchButton').addEventListener('click', function() {
+            const cardName = document.getElementById('cardInput').value;
+
+            // Fetch card data using your API and update the stats and picture sections
+            // Example:
+            // fetchCardData(cardName).then(data => {
+            //     document.querySelector('.stats-section').innerHTML = data.stats;
+            //     document.getElementById('cardImage').src = data.imageUrl;
+            // });
+        });
+    </script>
 </body>
 </html>
+
+
 
 
 
