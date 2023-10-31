@@ -18,23 +18,50 @@ images:
   #card-search {
     padding: 10px;
     font-size: 16px;
+    border: 2px solid #3498db;
+    border-radius: 5px;
+    outline: none;
+  }
+
+  #card-search::placeholder {
+    color: #95a5a6;
   }
 
   button {
     padding: 10px 20px;
     font-size: 16px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
   }
 
   .card-details {
-    display: none; /* Hide the card details by default */
+    display: none;
     border: 2px solid black;
     margin: 20px;
     background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .result-box {
+    display: none;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f1c40f; /* Yellow background */
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
   }
 
   .card-image {
     border: 2px solid black;
     text-align: center;
+    border-radius: 15px; /* Adding rounded corners */
+    padding: 15px; /* Increase padding to create space for curved corners */
   }
 
   img {
@@ -50,6 +77,16 @@ images:
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 5px;
+  }
+
+  .card-description {
+    font-style: italic;
+  }
+
+  .photo-description {
+    font-weight: bold;
+    color: black;
+    font-size: 18px;
   }
 </style>
 </head>
@@ -70,9 +107,29 @@ images:
         <!-- Add more stats here as needed -->
       </div>
     </div>
+    <div class="card-description" id="card-description"></div>
+  </div>
+  
+  <!-- Add the result box to display user input -->
+  <div class="result-box" id="search-result-box">
+    <h2>You Have Inputted:</h2>
+    <p id="search-result"></p>
   </div>
   
   <script>
+    function slideDown(element) {
+      let pos = -300;
+      const interval = setInterval(frame, 5);
+      function frame() {
+        if (pos >= 0) {
+          clearInterval(interval);
+        } else {
+          pos += 5;
+          element.style.top = pos + 'px';
+        }
+      }
+    }
+
     function searchCard() {
       const cardName = document.getElementById('card-search').value;
 
@@ -88,10 +145,35 @@ images:
 
       // Show the card details container
       document.querySelector('.card-details').style.display = 'block';
+
+      // Display the user input in the result box
+      const searchResultBox = document.getElementById('search-result-box');
+      const searchResult = document.getElementById('search-result');
+      searchResult.textContent = cardName;
+      
+      // Display the description below the card image
+      const cardDescription = document.getElementById('card-description');
+      cardDescription.textContent = `The picture of ${cardName}`;
+      
+      // Display the photo description above the card image
+      const photoDescription = document.getElementById('card-image');
+      photoDescription.insertAdjacentHTML('beforebegin', `<div class="photo-description">Photo of ${cardName}</div>`);
+      
+      // Add a creative animation
+      searchResultBox.style.top = '-300px';
+      searchResultBox.style.display = 'block';
+      slideDown(searchResultBox);
     }
   </script>
-  
 </body>
 </html>
+
+
+
+
+
+
+
+
 
 
