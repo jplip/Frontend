@@ -132,10 +132,23 @@ images:
 
     function searchCard() {
       const cardName = document.getElementById('card-search').value;
-
+      
       // Make an AJAX request to your Clash Royale API to fetch card data
       // Update the card image, name, and stats in the DOM with the fetched data
-
+      generateButton.addEventListener('click', () => {
+      // Replace the URL with the new endpoint for random quotes.
+      const apiUrl = 'http://localhost:8019/api/cardapi/';
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          const quote = data.quote; // Assuming the API response has a "quote" property.
+          quoteText.textContent = `"${quote}"`;
+        })
+        .catch(error => {
+          quoteText.textContent = 'Failed to fetch quotes. Please try again later.';
+          console.error('Error:', error);
+        });
+    });
       // Example:
       // const cardData = fetchCardData(cardName); // You need to implement this function
       // document.getElementById('card-image').src = cardData.imageURL;
