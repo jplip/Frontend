@@ -8,57 +8,90 @@ images:
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        /* CSS Styles (Same as previous examples) */
-    </style>
+<style>
+  /* Basic styles for the search bar and card details */
+  .search-container {
+    text-align: center;
+    margin: 20px;
+  }
+
+  #card-search {
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+
+  .card-details {
+    display: none; /* Hide the card details by default */
+    border: 2px solid black;
+    margin: 20px;
+    background-color: white;
+  }
+
+  .card-image {
+    border: 2px solid black;
+    text-align: center;
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .stats {
+    padding: 10px;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+  }
+</style>
 </head>
 <body>
-    <!-- Tab and Search Elements (Same as previous examples) -->
+  <div class="search-container">
+    <input type="text" id="card-search" placeholder="Search for a card...">
+    <button onclick="searchCard()">Search</button>
+  </div>
+  <div class="card-details">
+    <div class="card-image">
+        <img id="card-image" src="cardSearch.jpeg" alt="Card Image">
+    </div>
+    <div class="stats">
+      <h2>Card Name: <span id="card-name"></span></h2>
+      <div class="stat-grid">
+        <div>Damage: <span id="damage"></span></div>
+        <div>Hitpoints: <span id="hitpoints"></span></div>
+        <!-- Add more stats here as needed -->
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function searchCard() {
+      const cardName = document.getElementById('card-search').value;
 
-    <script>
-        // JavaScript Code
-        document.getElementById('cardSearchTab').addEventListener('click', function () {
-            // Handle "Card Search" tab click
-            showCardSearch();
-        });
+      // Make an AJAX request to your Clash Royale API to fetch card data
+      // Update the card image, name, and stats in the DOM with the fetched data
 
-        document.getElementById('searchButton').addEventListener('click', function () {
-            // Handle search button click
-            searchCards();
-        });
+      // Example:
+      // const cardData = fetchCardData(cardName); // You need to implement this function
+      // document.getElementById('card-image').src = cardData.imageURL;
+      // document.getElementById('card-name').textContent = cardData.name;
+      // document.getElementById('damage').textContent = cardData.damage;
+      // document.getElementById('hitpoints').textContent = cardData.hitpoints;
 
-        function showCardSearch() {
-            // Display the card search interface and hide other content
-            // You can use CSS to control visibility or replace inner HTML content
-        }
-
-        function searchCards() {
-            const query = document.getElementById('cardSearchInput').value.toLowerCase();
-
-            // Make an AJAX request to the backend API
-            fetch('/api/cards')
-                .then(response => response.json())
-                .then(data => {
-                    // Filter card data based on the query
-                    const matchingCards = data.filter(card => card.name.toLowerCase().includes(query));
-                    displayMatchingCards(matchingCards);
-                })
-                .catch(error => {
-                    console.error('Error fetching card data:', error);
-                });
-        }
-
-        function displayMatchingCards(cards) {
-            const cardDisplay = document.querySelector('.card-display');
-            cardDisplay.innerHTML = ''; // Clear previous results
-
-            cards.forEach(card => {
-                const cardImage = document.createElement('img');
-                cardImage.src = card.image_url;
-                cardDisplay.appendChild(cardImage);
-            });
-        }
-    </script>
+      // Show the card details container
+      document.querySelector('.card-details').style.display = 'block';
+    }
+  </script>
+  
 </body>
 </html>
+
 

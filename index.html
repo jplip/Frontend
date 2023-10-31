@@ -7,7 +7,9 @@ images:
 ---
 
 <title>Clash Royale API</title>
+
 <script>
+  
     // prepare HTML result container for new output
     const resultContainer = document.getElementById("result");
   
@@ -150,15 +152,6 @@ images:
         });
         return button;
       }
-
-      // Create and append the common chest button
-    var buttonContainer = document.querySelector(".button-container");
-    var commonChestButton = createButton("common-chest", "common-button", "Common Chest", commonCards);
-    buttonContainer.appendChild(commonChestButton);
-
-    // Create and append the rare chest button
-    var rareChestButton = createButton("rare-chest", "rare-button", "Rare Chest", rareCards);
-    buttonContainer.appendChild(rareChestButton);
 </script>
 </div>
 <meta charset="UTF-8">
