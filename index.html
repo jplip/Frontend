@@ -6,158 +6,140 @@ images:
     src: /images/clashback.jpg
 ---
 
-<title>Clash Royale API</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Card Generator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
-<script>
-  
-    // prepare HTML result container for new output
-    const resultContainer = document.getElementById("result");
-  
-    // function to fetch data based on user input
-    function fetchData() {
-      // clear previous results
-      resultContainer.innerHTML = "";
-  
-      // get user input
-      const filterInput = document.getElementById("filterInput");
-      const filter = filterInput.value;
-  
-      // prepare fetch options
-      const url = "https://itunes.apple.com/search?term=" + encodeURIComponent(filter);
-      const headers = {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'default',
-        credentials: 'omit',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-      };
-  
-      // fetch the API
-      fetch(url, headers)
-        .then(response => {
-          // check for response errors
-          if (response.status !== 200) {
-            const errorMsg = 'Database response error: ' + response.status;
-            console.log(errorMsg);
-            const tr = document.createElement("tr");
-            const td = document.createElement("td");
-            td.innerHTML = errorMsg;
-            tr.appendChild(td);
-            resultContainer.appendChild(tr);
-            return;
-          }
-          // valid response will have JSON data
-          response.json().then(data => {
-            console.log(data);
-  
-            // Music data
-          for (const row of data.results) {
-              console.log(row);
-  
-              // tr for each row
-              const tr = document.createElement("tr");
-              // td for each column
-              const artist = document.createElement("td");
-              const track = document.createElement("td");
-              const image = document.createElement("td");
-              const preview = document.createElement("td");
-  
-              // data is specific to the API
-              artist.innerHTML = row.artistName;
-              track.innerHTML = row.trackName; 
-              // create preview image
-              const img = document.createElement("img");
-              img.src = row.artworkUrl100;
-              image.appendChild(img);
-              // create preview player
-              const audio = document.createElement("audio");
-              audio.controls = true;
-              const source = document.createElement("source");
-              source.src = row.previewUrl;
-              source.type = "audio/mp4";
-              audio.appendChild(source);
-              preview.appendChild(audio);
-  
-              // this builds td's into tr
-              tr.appendChild(artist);
-              tr.appendChild(track);
-              tr.appendChild(image);
-              tr.appendChild(preview);
-  
-              // add HTML to container
-              resultContainer.appendChild(tr);
-            }
-          })
-        })
-        .catch(err => {
-          console.error(err);
-          const tr = document.createElement("tr");
-          const td = document.createElement("td");
-          td.innerHTML = err;
-          tr.appendChild(td);
-          resultContainer.appendChild(tr);
-        });
-    }
-</script>
-<style>
-    h1 {
-        text-align: center;
-    }
+        .container {
+            text-align: center;
+        }
 
-.button-container {
-    text-align: center;
-}
+        .card {
+            width: 400px; /* Adjust the width to your desired size */
+            height: 300px; /* Adjust the height to your desired size */
+            background-color: white;
+            border-radius: 20px; /* Increase the border radius for rounder edges */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
 
-/* Define a CSS class for button styles */
-.custom-button {
-    background: linear-gradient(to bottom, #5d5d5e 0%, #747474 100%);
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 18px;
-    margin: 10px;
-    cursor: pointer;
-    border-radius: 25px;
-    transition: background 0.3s, box-shadow 0.3s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+        .card-title {
+            background-color: blue;
+            color: white;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 18px; /* Adjust the font size to make it smaller */
+        }
 
-    /* Define the hover style */
-    .custom-button:hover {
-        background: linear-gradient(to bottom, #6d6d6d 0%, #575757 100%);
-        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-    }
-</style>
-<h1>Clash Royale Card Viewer</h1>
-<div id="card-container">
-    <!-- Cards will be displayed here -->
-</div>
-<div class="button-container">
+        .generate-button {
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px; /* Add some spacing between the title and the button */
+        }
+
+        .generate-button:hover {
+            background-color: darkred; /* Change color on hover for a nice effect */
+        }
+
+        #card-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        #card-table th, #card-table td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+  <div class="container">
+      <div class="card">
+          <div class="card-title">Random Card Generator</div>
+          <button class="generate-button" onclick="generateCard()">Generate Card</button>
+          <div id="table-container"></div>
+      </div>
+  </div>
+
   <script>
-    function createButton(id, className, text, cardList) {
-        var button = document.createElement("button");
-        button.id = id;
-        button.className = "custom-button " + className; // Apply the custom styles
-        button.innerHTML = text;
-        button.addEventListener("click", function() {
-                // Randomly select a card from the list
-            var randomCard = cardList[Math.floor(Math.random() * cardList.length)];
-            var resultContainer = document.getElementById("card-container");
-            resultContainer.innerHTML = "You have opened the chest and received a " + randomCard;
-        });
-        return button;
+      function generateCard() {
+          fetch('https://api.clashroyale.com/v1/cards', {
+              method: 'GET',
+              headers: {
+                  'Authorization': 'Bearer YOUR_API_KEY', // Replace with your Clash Royale API key
+              }
+          })
+          .then(response => response.json())
+          .then(data => {
+              const cardData = data.items[0]; // Assuming you want the data for the first card
+
+              // Create a table element
+              var table = document.createElement("table");
+              table.id = "card-table";
+
+              // Create the table header row
+              var headerRow = table.insertRow(0);
+              var headers = ["Name", "Picture", "Health", "Damage"];
+
+              for (var i = 0; i < headers.length; i++) {
+                  var th = document.createElement("th");
+                  th.innerHTML = headers[i];
+                  headerRow.appendChild(th);
+              }
+
+              // Create a row with fetched data
+              var dataRow = table.insertRow(1);
+
+              // Extract the relevant data from the fetched API response
+              var name = cardData.name;
+              var picture = cardData.iconUrls.medium;
+              var health = cardData.hitpoints;
+              var damage = cardData.damage;
+
+              var data = [name, `<img src="${picture}" alt="${name}" width="50">`, health, damage];
+
+              for (var j = 0; j < data.length; j++) {
+                  var td = dataRow.insertCell(j);
+                  td.innerHTML = data[j];
+              }
+
+              // Clear any existing table and add the new table
+              var tableContainer = document.getElementById("table-container");
+              tableContainer.innerHTML = "";
+              tableContainer.appendChild(table);
+          })
+          .catch(error => {
+              console.error('Error fetching data from Clash Royale API: ', error);
+          });
       }
-</script>
-</div>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Random Image Display</title>
-<script src="script.js" defer></script>
-<button id="randomImageBtn">Random Card</button>
-<img id="imageDisplay" alt="Random Image" style="max-width: 100%; height: auto;">
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
