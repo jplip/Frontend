@@ -71,62 +71,36 @@ title: Clash Random
         <div class="card-title">Clash Royale Chest</div>
         <button class="generate-button" onclick="generateCard()">Generate Card</button>
         <div id="table-container"></div>
+        <h2>Card Name: <span id="card-name"></span></h2>
+        <img id="random-image" src="" alt="Random Image">
     </div>
 </div>
 
 <script>
     function generateCard() {
         const imageContainer = document.getElementById('image-container');
-        const cardName = document.getElementById('card-search').value;
         const errorMessage = document.getElementById('error-message');
         // Make an AJAX request to your Clash Royale API to fetch card data
         // Update the card image, name, and stats in the DOM with the fetched data
         // Replace the URL with the new endpoint for random quotes.
-        const apiUrl = 'https://clash-flask.stu.nighthawkcodingsociety.com/api/random' + cardName;
+        const apiUrl = 'https://clash-flask.stu.nighthawkcodingsociety.com/api/cards/random';
         fetch(apiUrl)
           .then(response => response.json())
           .then(data => {
-            const cardNameFromData = data[0].name;
+            const cardNameFromData = data.name;
+            const hi = 4;
+            const hib = 4;
             document.getElementById('card-name').textContent = cardNameFromData;
-            const maxLevelFromData = data[0].maxLevel;
-            document.getElementById('maxlev').textContent = maxLevelFromData;
-            const imgURL = data[0].medium; // Assuming the API response has a "quote" property.
+            const imgURL = data.medium; // Assuming the API response has a "quote" property.
             const img = document.createElement('img');
             img.src = imgURL;
-            document.getElementById('card-image').src = imgURL;
+            document.getElementById('random-image').src = imgURL;
           })
           .catch(error => {
             errorMessage.textContent = 'Failed to fetch image. Please try again later.';
             console.error('Error:', error);
           });
-        // Example:
-        // const cardData = fetchCardData(cardName); // You need to implement this function
-        // document.getElementById('card-image').src = cardData.imageURL;
-        // document.getElementById('card-name').textContent = cardData.name;
-        // document.getElementById('damage').textContent = cardData.damage;
-        // document.getElementById('hitpoints').textContent = cardData.hitpoints;
-  
-        // Show the card details container
-        document.querySelector('.card-details').style.display = 'block';
-  
-        // Display the user input in the result box
-        const searchResultBox = document.getElementById('search-result-box');
-        const searchResult = document.getElementById('search-result');
-        searchResult.textContent = cardName;
         
-        // Display the description below the card image
-        const cardDescription = document.getElementById('card-description');
-        cardDescription.textContent = `The picture of ${cardName}`;
-        
-        // Display the photo description above the card image
-        const photoDescription = document.getElementById('card-image');
-        photoDescription.insertAdjacentHTML('beforebegin', `<div class="photo-description">Photo of ${cardName}</div>`);
-        
-        // Add a creative animation
-        searchResultBox.style.top = '-300px';
-        searchResultBox.style.display = 'block';
-        slideDown(searchResultBox);
-
         }
 </script>
 </body>
