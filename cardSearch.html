@@ -115,7 +115,7 @@ images:
     <h2>You Have Inputted:</h2>
     <p id="search-result"></p>
   </div>
-  
+  <div id="image-container"></div>
   <script>
     function slideDown(element) {
       let pos = -300;
@@ -131,7 +131,9 @@ images:
     }
 
     function searchCard() {
+      const imageContainer = document.getElementById('image-container');
       const cardName = document.getElementById('card-search').value;
+      const errorMessage = document.getElementById('error-message');
       // Make an AJAX request to your Clash Royale API to fetch card data
       // Update the card image, name, and stats in the DOM with the fetched data
       // Replace the URL with the new endpoint for random quotes.
@@ -139,11 +141,13 @@ images:
       fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-          const quote = data.quote; // Assuming the API response has a "quote" property.
-          quoteText.textContent = `"${quote}"`;
+          const imgURL = data[0].medium; // Assuming the API response has a "quote" property.
+          const img = document.createElement('img');
+          img.src = imgURL;
+          imageContainer.appendChild(img);
         })
         .catch(error => {
-          quoteText.textContent = 'Failed to fetch quotes. Please try again later.';
+          errorMessage.textContent = 'Failed to fetch image. Please try again later.';
           console.error('Error:', error);
         });
       // Example:
