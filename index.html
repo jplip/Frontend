@@ -1,138 +1,131 @@
 ---
 layout: base
-title: Clash Royale API
-images:
-  background:
-    src: /images/clashback.jpg
+title: Clash Random
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-            <style>
-                body {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    height: 100vh;
-                    margin: 0;
-                    background-color: black; /* Set the background color to black */
-                    color: white; /* Set text color to white */
-                }
-                
-                .container {
-                    text-align: center;
-                }
-                
-                .card {
-                    width: 400px;
-                    height: 300px;
-                    background-color: #000000; /* Dark gray background color */
-                    border-radius: 20px;
-                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Increase the shadow for depth */
-                    padding: 20px;
-                }
-                
-                .card-title {
-                    background-color: #042895; /* Blue color for the title background */
-                    color: white;
-                    border-radius: 10px;
-                    padding: 10px;
-                    font-size: 18px;
-                }
-                
-                .generate-button {
-                    background-color: #DC3545; /* Red color for the button background */
-                    color: white;
-                    border: none;
-                    border-radius: 5px;
-                    padding: 10px 20px;
-                    font-size: 16px;
-                    cursor: pointer;
-                    margin-top: 20px;
-                    transition: background-color 0.3s; /* Smooth transition for hover effect */
-                }
-                
-                .generate-button:hover {
-                    background-color: #C82333; /* Dark red color on hover */
-                }
-                
-                #card-table {
-                    width: 100%;
-                    margin-top: 20px;
-                    border-collapse: collapse;
-                    color: white;
-                }
-                
-                #card-table th, #card-table td {
-                    border: 1px solid white; /* White border color for table */
-                    padding: 8px;
-                    text-align: center;
-                }        
-        
-    </style>
-</head>
-<body>
-  <div class="container">
-      <div class="card">
-          <div class="card-title">Clash Royale Chest</div>
-          <button class="generate-button" onclick="generateCard()">Generate Card</button>
-          <div id="table-container"></div>
-      </div>
-  </div>
 
-  <script>
-      function generateCard() {
-          fetch('https://api.clashroyale.com/v1/cards', {
-              method: 'GET',
-              headers: {
-                  'Authorization': 'Bearer YOUR_API_KEY', // Replace with your Clash Royale API key
-              }
-          })
-          .then(response => response.json())
-          .then(data => {
-              const cardData = data.items[0]; // Assuming you want the data for the first card
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: black; /* Set the background color to black */
+        color: white; /* Set text color to white */
+    }
+    
+    .container {
+        text-align: center;
+    }
+    
+    .card {
+        width: 400px;
+        height: 300px;
+        background-color: #000000; /* Dark gray background color */
+        border-radius: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Increase the shadow for depth */
+        padding: 20px;
+    }
+    
+    .card-title {
+        background-color: #042895; /* Blue color for the title background */
+        color: white;
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 18px;
+    }
+    
+    .generate-button {
+        background-color: #DC3545; /* Red color for the button background */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s; /* Smooth transition for hover effect */
+    }
+    
+    .generate-button:hover {
+        background-color: #C82333; /* Dark red color on hover */
+    }
+    
+    #card-table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+        color: white;
+    }
+    
+    #card-table th, #card-table td {
+        border: 1px solid white; /* White border color for table */
+        padding: 8px;
+        text-align: center;
+    }        
+</style>
 
-              // Create a table element
-              var table = document.createElement("table");
-              table.id = "card-table";
+<div class="container">
+    <div class="card">
+        <div class="card-title">Clash Royale Chest</div>
+        <button class="generate-button" onclick="generateCard()">Generate Card</button>
+        <div id="table-container"></div>
+    </div>
+</div>
 
-              // Create the table header row
-              var headerRow = table.insertRow(0);
-              var headers = ["Name", "Picture", "Health", "Damage"];
+<script>
+    function generateCard() {
+        fetch('https://api.clashroyale.com/v1/cards', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer YOUR_API_KEY', // Replace with your Clash Royale API key
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const cardData = data.items[0]; // Assuming you want the data for the first card
 
-              for (var i = 0; i < headers.length; i++) {
-                  var th = document.createElement("th");
-                  th.innerHTML = headers[i];
-                  headerRow.appendChild(th);
-              }
+            // Create a table element
+            var table = document.createElement("table");
+            table.id = "card-table";
 
-              // Create a row with fetched data
-              var dataRow = table.insertRow(1);
+            // Create the table header row
+            var headerRow = table.insertRow(0);
+            var headers = ["Name", "Picture", "Health", "Damage"];
 
-              // Extract the relevant data from the fetched API response
-              var name = cardData.name;
-              var picture = cardData.iconUrls.medium;
-              var health = cardData.hitpoints;
-              var damage = cardData.damage;
+            for (var i = 0; i < headers.length; i++) {
+                var th = document.createElement("th");
+                th.innerHTML = headers[i];
+                headerRow.appendChild(th);
+            }
 
-              var data = [name, `<img src="${picture}" alt="${name}" width="50">`, health, damage];
+            // Create a row with fetched data
+            var dataRow = table.insertRow(1);
 
-              for (var j = 0; j < data.length; j++) {
-                  var td = dataRow.insertCell(j);
-                  td.innerHTML = data[j];
-              }
+            // Extract the relevant data from the fetched API response
+            var name = cardData.name;
+            var picture = cardData.iconUrls.medium;
+            var health = cardData.hitpoints;
+            var damage = cardData.damage;
 
-              // Clear any existing table and add the new table
-              var tableContainer = document.getElementById("table-container");
-              tableContainer.innerHTML = "";
-              tableContainer.appendChild(table);
-          })
-          .catch(error => {
-              console.error('Error fetching data from Clash Royale API: ', error);
-          });
-      }
-  </script>
+            var data = [name, `<img src="${picture}" alt="${name}" width="50">`, health, damage];
+
+            for (var j = 0; j < data.length; j++) {
+                var td = dataRow.insertCell(j);
+                td.innerHTML = data[j];
+            }
+
+            // Clear any existing table and add the new table
+            var tableContainer = document.getElementById("table-container");
+            tableContainer.innerHTML = "";
+            tableContainer.appendChild(table);
+        })
+        .catch(error => {
+            console.error('Error fetching data from Clash Royale API: ', error);
+        });
+    }
+</script>
 </body>
 </html>
 
