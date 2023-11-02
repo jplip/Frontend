@@ -44,6 +44,7 @@ images:
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: black;
   }
 
   .result-box {
@@ -102,7 +103,7 @@ images:
     <div class="stats">
       <h2>Card Name: <span id="card-name"></span></h2>
       <div class="stat-grid">
-        <div>Damage: <span id="damage"></span></div>
+        <div>Max Level: <span id="maxlev"></span></div>
         <div>Hitpoints: <span id="hitpoints"></span></div>
         <!-- Add more stats here as needed -->
       </div>
@@ -141,6 +142,10 @@ images:
       fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
+          const cardNameFromData = data[0].name;
+          document.getElementById('card-name').textContent = cardNameFromData;
+          const maxLevelFromData = data[0].maxLevel;
+          document.getElementById('maxlev').textContent = maxLevelFromData;
           const imgURL = data[0].medium; // Assuming the API response has a "quote" property.
           const img = document.createElement('img');
           img.src = imgURL;
