@@ -4,6 +4,6 @@ title: About Me
 permalink: /about/
 ---
 
-A Fastpages clone, for CSA - Tirth Thakkar & Haseeb Beg
+This page is created by Beijan Moniza, Justin Liporada, Karam Kambo, and Rayhan Shamly
 
 
