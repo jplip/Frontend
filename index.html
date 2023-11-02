@@ -76,55 +76,58 @@ title: Clash Random
 
 <script>
     function generateCard() {
-        fetch('https://api.clashroyale.com/v1/cards', {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Bearer YOUR_API_KEY', // Replace with your Clash Royale API key
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            const cardData = data.items[0]; // Assuming you want the data for the first card
+        const imageContainer = document.getElementById('image-container');
+        const cardName = document.getElementById('card-search').value;
+        const errorMessage = document.getElementById('error-message');
+        // Make an AJAX request to your Clash Royale API to fetch card data
+        // Update the card image, name, and stats in the DOM with the fetched data
+        // Replace the URL with the new endpoint for random quotes.
+        const apiUrl = 'https://clash-flask.stu.nighthawkcodingsociety.com/api/random' + cardName;
+        fetch(apiUrl)
+          .then(response => response.json())
+          .then(data => {
+            const cardNameFromData = data[0].name;
+            document.getElementById('card-name').textContent = cardNameFromData;
+            const maxLevelFromData = data[0].maxLevel;
+            document.getElementById('maxlev').textContent = maxLevelFromData;
+            const imgURL = data[0].medium; // Assuming the API response has a "quote" property.
+            const img = document.createElement('img');
+            img.src = imgURL;
+            document.getElementById('card-image').src = imgURL;
+          })
+          .catch(error => {
+            errorMessage.textContent = 'Failed to fetch image. Please try again later.';
+            console.error('Error:', error);
+          });
+        // Example:
+        // const cardData = fetchCardData(cardName); // You need to implement this function
+        // document.getElementById('card-image').src = cardData.imageURL;
+        // document.getElementById('card-name').textContent = cardData.name;
+        // document.getElementById('damage').textContent = cardData.damage;
+        // document.getElementById('hitpoints').textContent = cardData.hitpoints;
+  
+        // Show the card details container
+        document.querySelector('.card-details').style.display = 'block';
+  
+        // Display the user input in the result box
+        const searchResultBox = document.getElementById('search-result-box');
+        const searchResult = document.getElementById('search-result');
+        searchResult.textContent = cardName;
+        
+        // Display the description below the card image
+        const cardDescription = document.getElementById('card-description');
+        cardDescription.textContent = `The picture of ${cardName}`;
+        
+        // Display the photo description above the card image
+        const photoDescription = document.getElementById('card-image');
+        photoDescription.insertAdjacentHTML('beforebegin', `<div class="photo-description">Photo of ${cardName}</div>`);
+        
+        // Add a creative animation
+        searchResultBox.style.top = '-300px';
+        searchResultBox.style.display = 'block';
+        slideDown(searchResultBox);
 
-            // Create a table element
-            var table = document.createElement("table");
-            table.id = "card-table";
-
-            // Create the table header row
-            var headerRow = table.insertRow(0);
-            var headers = ["Name", "Picture", "Health", "Damage"];
-
-            for (var i = 0; i < headers.length; i++) {
-                var th = document.createElement("th");
-                th.innerHTML = headers[i];
-                headerRow.appendChild(th);
-            }
-
-            // Create a row with fetched data
-            var dataRow = table.insertRow(1);
-
-            // Extract the relevant data from the fetched API response
-            var name = cardData.name;
-            var picture = cardData.iconUrls.medium;
-            var health = cardData.hitpoints;
-            var damage = cardData.damage;
-
-            var data = [name, `<img src="${picture}" alt="${name}" width="50">`, health, damage];
-
-            for (var j = 0; j < data.length; j++) {
-                var td = dataRow.insertCell(j);
-                td.innerHTML = data[j];
-            }
-
-            // Clear any existing table and add the new table
-            var tableContainer = document.getElementById("table-container");
-            tableContainer.innerHTML = "";
-            tableContainer.appendChild(table);
-        })
-        .catch(error => {
-            console.error('Error fetching data from Clash Royale API: ', error);
-        });
-    }
+        }
 </script>
 </body>
 </html>
