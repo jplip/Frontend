@@ -149,7 +149,7 @@ images:
           const imgURL = data[0].medium; // Assuming the API response has a "quote" property.
           const img = document.createElement('img');
           img.src = imgURL;
-          imageContainer.appendChild(img);
+          document.getElementById('card-image').src = imgURL;
         })
         .catch(error => {
           errorMessage.textContent = 'Failed to fetch image. Please try again later.';
