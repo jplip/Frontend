@@ -4,69 +4,125 @@ title: Clash Random
 ---
 
 
-<style>
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        background-color: black; /* Set the background color to black */
-        color: white; /* Set text color to white */
-    }
-    
-    .container {
-        text-align: center;
-    }
-    
-    .card {
-        width: 400px;
-        height: 300px;
-        background-color: #000000; /* Dark gray background color */
-        border-radius: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Increase the shadow for depth */
-        padding: 20px;
-    }
-    
-    .card-title {
-        background-color: #042895; /* Blue color for the title background */
-        color: white;
-        border-radius: 10px;
-        padding: 10px;
-        font-size: 18px;
-    }
-    
-    .generate-button {
-        background-color: #DC3545; /* Red color for the button background */
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        margin-top: 20px;
-        transition: background-color 0.3s; /* Smooth transition for hover effect */
-    }
-    
-    .generate-button:hover {
-        background-color: #C82333; /* Dark red color on hover */
-    }
-    
-    #card-table {
-        width: 100%;
-        margin-top: 20px;
-        border-collapse: collapse;
-        color: white;
-    }
-    
-    #card-table th, #card-table td {
-        border: 1px solid white; /* White border color for table */
-        padding: 8px;
-        text-align: center;
-    }        
-</style>
 
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: black;
+            color: white;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
+        .key-box {
+            width: 300px;
+            background-color: #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin-right: 20px;
+        }
+
+        .key-title {
+            font-size: 18px;
+            color: #F0A500;
+        }
+
+        .key-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .key-info p {
+            margin: 5px 0;
+        }
+
+        .common {
+            color: white;
+        }
+
+        .rare {
+            color: orange;
+        }
+
+        .epic {
+            color: purple;
+        }
+
+        .legendary {
+            color: gold;
+        }
+
+        .champion {
+            color: #F0A500;
+        }
+
+        .card {
+            width: 400px;
+            height: 300px;
+            background-color: #000000;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+        }
+
+        .card-title {
+            background-color: #042895;
+            color: white;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 18px;
+        }
+
+        .generate-button {
+            background-color: #DC3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .generate-button:hover {
+            background-color: #C82333;
+        }
+
+        #card-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            color: white;
+        }
+
+        #card-table th, #card-table td {
+            border: 1px solid white;
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
 <div class="container">
+    <div class="key-box">
+        <div class="key-title">Key for Rarities</div>
+        <div class="key-info">
+            <p class="common">If the card has no glow on the outside it is a Common Card.</p>
+            <p class="rare">If the card has an Orange Glow then it is a Rare Card.</p>
+            <p class="epic">If the card has a Purple Glow then you have received an epic card.</p>
+            <p class="legendary">If your card is in a Hexagon Shape it is a Legendary Card.</p>
+            <p class="champion">If your card has a Gold Outline then it is a Champion Card.</p>
+        </div>
+    </div>
     <div class="card">
         <div class="card-title">Clash Royale Chest</div>
         <button class="generate-button" onclick="generateCard()">Generate Card</button>
@@ -85,23 +141,23 @@ title: Clash Random
         // Replace the URL with the new endpoint for random quotes.
         const apiUrl = 'https://clash-flask.stu.nighthawkcodingsociety.com/api/cards/random';
         fetch(apiUrl)
-          .then(response => response.json())
-          .then(data => {
-            const cardNameFromData = data.name;
-            const hi = 4;
-            const hib = 4;
-            document.getElementById('card-name').textContent = cardNameFromData;
-            const imgURL = data.medium; // Assuming the API response has a "quote" property.
-            const img = document.createElement('img');
-            img.src = imgURL;
-            document.getElementById('random-image').src = imgURL;
-          })
-          .catch(error => {
-            errorMessage.textContent = 'Failed to fetch image. Please try again later.';
-            console.error('Error:', error);
-          });
-        
-        }
+            .then(response => response.json())
+            .then(data => {
+                const cardNameFromData = data.name;
+                const hi = 4;
+                const hib = 4;
+                document.getElementById('card-name').textContent = cardNameFromData;
+                const imgURL = data.medium; // Assuming the API response has a "quote" property.
+                const img = document.createElement('img');
+                img.src = imgURL;
+                document.getElementById('random-image').src = imgURL;
+            })
+            .catch(error => {
+                errorMessage.textContent = 'Failed to fetch image. Please try again later.';
+                console.error('Error:', error);
+            });
+
+    }
 </script>
 </body>
 </html>
