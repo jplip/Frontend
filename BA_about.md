@@ -1,9 +1,12 @@
 ---
 layout: page
-title: About Me
+title: About Us
 permalink: /about/
 ---
 
-This page is created by Beijan Moniza, Justin Liporada, Karam Kambo, and Rayhan Shamly
+## This page is created by:
 
-
+- Beijan Moniza: Scrum Master
+- Rayhan Shamly: DevOps
+- Karam Kambo: Frontend Developer
+- Justin Liporada: Backend Developer
